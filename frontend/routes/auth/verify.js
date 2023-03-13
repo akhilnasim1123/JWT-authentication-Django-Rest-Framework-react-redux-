@@ -12,7 +12,7 @@ router.get('/api/users/verify', async (req, res) => {
 	});
 
 	try {
-		const apiRes = await fetch(`${process.env.API_URL}/api/token/verify/`, {
+		const apiRes = await fetch(`${process.env.API_URL}/api/users/verify/`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',

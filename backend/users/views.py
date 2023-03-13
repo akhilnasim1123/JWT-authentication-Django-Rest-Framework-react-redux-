@@ -2,7 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status,generics
 from .serializers import UserCreateSerializer, UserSerializer
-
+from rest_framework.permissions import IsAuthenticated
+from .models import UserAccount
 
 class RegisterView(APIView):
 
@@ -21,10 +22,18 @@ class RegisterView(APIView):
 
 
 class RetrieveUserView(APIView):
-  permission_classes = [permissions.IsAuthenticated]
-
+  print('entered')
+  permission_classes = [IsAuthenticated]
+  print('isauthenticated')
   def get(self, request):
+    print('request')
     user = request.user
+    print(user)
+
     user = UserSerializer(user)
+    # print(user_data)
+
 
     return Response(user.data, status=status.HTTP_200_OK)
+
+    

@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/api/users/login', async (req, res) => {
 	const { email, password } = req.body;
+	console.log(req.cookies);
 
 	const body = JSON.stringify({ email, password });
 
