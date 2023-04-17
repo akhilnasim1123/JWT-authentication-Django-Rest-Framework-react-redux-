@@ -10,17 +10,12 @@ from rest_framework.permissions import AllowAny
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]
-    print('sakdfs sadfnsdf sdfasdfsdkjf sddfas dfas dfas dfs f sdf    f sd')
 
     def post(self, request):
         data = request.data
-        print(data)
-        print('sakdfs sadfnsdf sdfasdfsdkjf sddfas dfas dfas dfs f sdf    f sd')
         serializer = UserCreateSerializer(data=data)
-
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
         user = serializer.create(serializer.validated_data)
         user = UserSerializer(user)
 
@@ -28,23 +23,17 @@ class RegisterView(APIView):
 
 
 class RetrieveUserView(APIView):
-    print('entered')
     permission_classes = [IsAuthenticated]
-    print('isauthenticated')
 
     def get(self, request):
-        print('request')
         user = request.user
         all_user = UserAccount.objects.all()
         print(all_user)
         print(user)
         user_data = UserAccount.objects.get(email=user)
         print(user_data.is_superuser)
-
         user = UserSerializer(user)
         all_user = UserSerializer(all_user)
-        # print(user_data)
-
         return Response(user.data, status=status.HTTP_200_OK)
 
 
@@ -63,12 +52,10 @@ class AdminLogin(APIView):
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def UserData(request):
-    print('heyyy')
     if request.method == 'GET':
         user = UserAccount.objects.filter(is_superuser=False)
         print(user)
         user = UserSerializer(user, many=True)
-        print(user.data, 'user.dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         return Response(user.data, status=status.HTTP_200_OK)
 
 
@@ -97,11 +84,7 @@ def Update(request):
         data = request.data
         email = data['email']
         url = data['url']
-        print(url)
-        print(email)
-
         user = UserAccount.objects.get(email=email)
-        print(user)
         user.image_url = url
         user.save()
         return Response(status=status.HTTP_200_OK)
@@ -113,8 +96,6 @@ def Delete(request):
     if request.method == 'POST':
         data = request.data
         email = data
-        print(email, 'deleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeteeeeeeeeeeeeeeeeeeeee')
-
         user = UserAccount.objects.get(email=email)
         user.delete()
         all_user = UserAccount.objects.filter(is_superuser=False).order_by()

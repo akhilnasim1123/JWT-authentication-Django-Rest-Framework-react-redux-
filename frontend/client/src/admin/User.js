@@ -3,12 +3,9 @@ import AdminLayout from "./adminLayout";
 import { BlockUser, DeleteUser, searchData, UsersDetails } from "../context/Store";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
+
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
-import { InputText } from "primereact/inputtext";
-
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 //core
@@ -16,7 +13,6 @@ import "primereact/resources/primereact.min.css";
 
 //icons
 import "primeicons/primeicons.css";
-import { Navigate } from "react-router-dom";
 
 const UserData = () => {
   const dispatch = useDispatch();
